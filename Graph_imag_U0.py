@@ -42,9 +42,11 @@ class Im():
 
 
 class Calulus():
-    def __init__(self, Docref, Docabs):
+    def __init__(self, Docref, Docabs, Gau=False, Heat=False):
         self.Docref=Docref
         self.Docabs=Docabs
+        self.Gau=Gau
+        self.Heat=Heat
         
     def Print(self):
         print(0.65*10**(-6))
@@ -103,10 +105,10 @@ class Calulus():
         elif self.Docref=='u6ref.csv':
             Magnification=1.95
             Cmin=-10
-            Imin=340
-            Imax=420
-            Jmin=760
-            Jmax=840
+            Imin=648
+            Imax=672
+            Jmin=755
+            Jmax=790
             
         elif self.Docref=='u3ref.csv':
             Magnification=0.65            
@@ -154,16 +156,45 @@ class Calulus():
         return (N,Imin,Imax,Jmin,Jmax)
     
     
-    def Plot(self):
-        Lmax=self.Ntot()
-        plt.figure()
-        sns.heatmap(self.ODxy(),cmap='jet')
-        plt.xlim(Lmax[3],Lmax[4])
-        plt.ylim(Lmax[1],Lmax[2])
-        plt.title(self.Docref)
-        plt.xlabel("$x$")
-        plt.ylabel("$y$")
-        plt.show()
+    
+    def Gaussian(self):
+        Y=[]
+        X=[]
+        OD=self.ODxy()
+        Ninfo=self.Ntot()
+        for i in range(Ninfo[1],Ninfo[2]):
+            Seum=0
+            for j in range(Ninfo[3],Ninfo[4],1):
+                Seum=Seum+OD[i][j]
+            Y.append(Seum)
+            X.append(i)
+        return X,Y
+    
+    
+         
+        
+    def Plot(self,Gau=False,Heat=False):
+        
+        if Gau==True:
+            G=self.Gaussian()
+            plt.figure()
+            plt.xlabel('$y$')
+            plt.ylabel('$n_{2D}$')
+            plt.plot(G[0],G[1],'ob')
+            plt.title(self.Docref)
+            plt.legend()
+            plt.show()
+        
+        if Heat==True:
+            Lmax=self.Ntot()
+            plt.figure()
+            sns.heatmap(self.ODxy(),cmap='jet')
+            plt.xlim(Lmax[3],Lmax[4])
+            plt.ylim(Lmax[1],Lmax[2])
+            plt.title(self.Docref)
+            plt.xlabel("$x$")
+            plt.ylabel("$y$")
+            plt.show()
         
         
     
@@ -176,43 +207,19 @@ if __name__ == "__main__":
     # U0ref.Plot()
     # U0abs.Plot()
     
+    P=[0,1,2,3,7,8]
+    P=[6]
+    for i in P:
+        U=Calulus('u'+str(i)+'ref.csv', 'u'+str(i)+'abs.csv')
+        NN=U.Ntot()[0]
+        print('Nb atomes U'+str(i)+' = ',NN)
+        U.Plot(Heat=True)
+        
+        U.Plot(Gau=True)
     
     
-    # U0=Calulus('u0ref.csv', 'u0abs.csv')
-    # NN0=U0.Ntot()[0]
-    # print('Nb atomes U0 = ',NN0)
-    # U0.Plot()
     
-    # U1=Calulus('u1ref.csv', 'u1abs.csv')
-    # NN1=U1.Ntot()[0]
-    # print('Nb atomes U1 = ',NN1)
-    # U1.Plot()
+   
     
-    U2=Calulus('u2ref.csv', 'u2abs.csv')
-    NN2=U2.Ntot()[0]
-    print('Nb atomes U2 = ',NN2)
-    U2.Plot()
-    
-    U3=Calulus('u3ref.csv', 'u3abs.csv')
-    NN3=U3.Ntot()[0]
-    print('Nb atomes U3 = ',NN3)
-    U3.Plot()
-    
-    # U6=Calulus('u6ref.csv', 'u6abs.csv')
-    # NN6=U6.Ntot()[0]
-    # print('Nb atomes U6 = ',NN6)
-    # U6.Plot()
-    
-    # U7=Calulus('u7ref.csv', 'u7abs.csv')
-    # NN7=U7.Ntot()[0]
-    # print('Nb atomes U7 = ',NN7)
-    # U7.Plot()
-    
-    # U8=Calulus('u8ref.csv', 'u8abs.csv')
-    # NN=U8.Ntot()[0]
-    # print('Nb atomes U8 = ',NN)
-    # U8.Plot()
-
-
 
 
