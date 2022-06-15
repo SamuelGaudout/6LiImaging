@@ -1,0 +1,82 @@
+[PlugCam]
+	
+	pixel_size 		= 6.45e-6
+	magnification	= 0.65
+	# ROIS ##
+	# Transport in plug cam
+	# ROI             = [400, 470, 1000, 1070]
+	# ROI             = [413, 439, 980, 1100]
+	# # Transport
+	# ROI             = [330, 480, 720, 880]
+	# # Dipole [ymin, ymax, xmin, xmax]
+	# ROI              = [330, 500, 700, 900]
+	# ROI              = [400, 600, 400, 650]
+	# # UVMOT
+	# ROI             = [250, 600, 600, 975]
+	## MOT
+	# ROI 			= [50, 1000, 50, 1000]
+	# # UVMOT, bigger
+	# ROI             = [200, 650, 550, 1025]
+	ROI 			= [200, 800, 200, 850]	
+	# MOT
+	# ROI             = [470, 570, 475, 575]
+	# Dark ROIS ## If a single value: width of the band around the ROI
+	dark_ROI        = 30
+	width   		= 1388
+	height  		= 1038
+	alias  			= system.soft.avtcams.manta_1
+
+[GlassCellCam]
+	
+	pixel_size 		= 6.45e-6
+	magnification 	= 1.95
+    ## ROIS ##
+	# ROI	 			= [50, 1000, 50, 1000]
+    ## CROSS
+	ROI        		= [460, 520, 880, 920]
+	## TINY CROSS
+	#ROI        		= [481, 501, 893, 913]
+	## Cross + transport
+	# ROI       		= [410, 690, 820, 980]
+	## Cross + Z-lattice
+	# ROI         	= [450, 550, 870, 970]    
+	# ROI         = [440, 540, 850, 955]    
+	## Transport
+	# ROI 		    = [410, 685, 885, 930]
+	## Dark ROIS ## If a single value: width of the band around the ROI
+	dark_ROI        = 15
+	# dark_ROI		= [460, 520, 800, 850]
+	width   		= 1388
+	height  		= 1038
+	alias  			= system.soft.avtcams.manta_2
+
+[LatticeCam]
+	
+	pixel_size 		= 6.45e-6
+	magnification 	= 10
+    ## ROIS ##
+	# ROI	 			= [50, 1000, 50, 1000]
+	## Z-lattice alignment 
+	# ROI               = [128, 211, 222, 1130]
+	# old lattice cam
+	# ROI               = [145, 185, 620, 740]
+	ROI               = [145, 185, 665, 715]
+	## Transport
+	# ROI             = [130, 195, 100, 1200]
+	## Dark ROIS ## If a single value: width of the band around the ROI
+	dark_ROI        = 30
+	width			= 1388
+	height			= 1038
+	alias			= system.soft.avtcams.manta_3
+
+[MainCam]
+    ROI             = [128, 211, 222, 1130]
+	width   		= 1024
+	height  		= 1024
+	alias   		= system.soft.picams.Princeton0
+
+[ImagingParameters]
+    
+	wvl     		= 670.962e-9
+	CG				= 0.5
+	gamma			= 37.699e6
